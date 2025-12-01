@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #e8f7ff, #8bc9ff, #277dff);
+}
+
+.container {
+    height: 100vh;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.card {
+      background: linear-gradient(135deg, #ffd9ec, #ff9fc9);
+      color: #003366;
+      width: 500px;
+}
+
+.form-check-label:hover {
+    cursor: pointer;
+}
+
+.list-group-item {
+    background: linear-gradient(135deg, #ffd9ec, #ff9fc9);
+    color: #003366;
+}
+
+.list-group-item:hover {
+    background-color: lavender;
+
+}
+
+.btn {
+    background: linear-gradient(135deg, #ffeaf3, #ff8ec4);
+    color: #333;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    width: 100px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 150, 200, 0.4);
+}
+
+ .heading1 {
+    background: linear-gradient(135deg, #ff9fc9, #ffeaf3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

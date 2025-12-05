@@ -87,12 +87,12 @@ var questions = document.getElementById("questions");
 var nextBtn = document.getElementById("nextBtn")
 var index = 0;
 var score = 0
-function showResult(){
+function showResult() {
     var totalQuestions = quiz.length;
     var wrong = totalQuestions - score;
-    var percentage = ((score / totalQuestions) * 100).toFixed(2);  
-    var resultMessage = percentage >= 50 ? "🎉 Congratulations! You Passed!" : 
-     "😔 Sorry! You Failed!";
+    var percentage = ((score / totalQuestions) * 100).toFixed(2);
+    var resultMessage = percentage >= 50 ? "🎉 Congratulations! You Passed!" :
+        "😔 Sorry! You Failed!";
     var btnClass = percentage >= 50 ? "btn-success" : "btn-danger";
 
     container.innerHTML = `
@@ -108,13 +108,13 @@ function showResult(){
         </div>
     `;
 
-    
+
 }
 function renderQuiz() {
-     if (index >= quiz.length) {
-       showResult()
+    if (index >= quiz.length) {
+        showResult()
         return;
-     }
+    }
     questions.innerHTML = `
 <div id="question">${quiz[index].question}</div>
 
@@ -165,32 +165,32 @@ function renderQuiz() {
 `;
     nextBtn.disabled = true
 
-   
+
 }
 
 
 function nextEnabled() {
     nextBtn.disabled = false
-     
+
 }
- function nextQuestion() {
+function nextQuestion() {
     var options = document.getElementsByClassName("form-check-input");
-    
-   
+
+
     for (var i = 0; i < options.length; i++) {
         if (options[i].checked && options[i].value === quiz[index].answer) {
             score++;
         }
     }
 
-    index++;  
+    index++;
 
-    
+
     if (index === quiz.length - 1) {
         nextBtn.innerText = "Submit";
     }
 
-    
+
     if (index >= quiz.length) {
         showResult();
     } else {
@@ -200,3 +200,138 @@ function nextEnabled() {
 
 nextBtn.onclick = nextQuestion;
 renderQuiz();
+
+
+
+
+function openQuizWindow() {
+    // Open a new popup window
+    var quizWindow = window.open('', '_blank', 'width=500,height=600,left=200,top=100,scrollbars=yes,resizable=yes');
+
+    if (!quizWindow) {
+        alert('Popup blocked! Please enable popups for this site.');
+        return;
+    }
+
+     
+    quizWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Quiz App</title>
+            <link
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+            />
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                    background: linear-gradient(135deg, #e8f7ff, #8bc9ff);
+                }
+                .card {
+                    background: linear-gradient(135deg, #ffd9ec, #ff9fc9);
+                    color: #003366;
+                    width: 100%;
+                    max-width: 450px;
+                    margin: auto;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                    padding: 20px;
+                }
+                .list-group-item:hover { background-color: lavender; }
+                .btn { margin-top: 15px; width: 100%; }
+            </style>
+        </head>
+        <body>
+            <div class="card" id="quizWindowContent"></div>
+            <button id="nextBtnWindow" class="btn btn-primary" disabled>Next</button>
+
+            <script>
+                // Copy the original quiz array from parent window
+                var quiz = ${JSON.stringify(quiz)};
+                var index = 0;
+                var score = 0;
+
+                var content = document.getElementById("quizWindowContent");
+                var nextBtnWindow = document.getElementById("nextBtnWindow");
+
+                function showResultWindow() {
+                    var totalQuestions = quiz.length;
+                    var wrong = totalQuestions - score;
+                    var percentage = ((score / totalQuestions) * 100).toFixed(2);
+                    var resultMessage = percentage >= 50 ? "🎉 Congratulations! You Passed!" : "😔 Sorry! You Failed!";
+                    var btnClass = percentage >= 50 ? "btn-success" : "btn-danger";
+
+                    content.innerHTML = \`
+                        <div class="card text-center">
+                            <div class="card-header">SkillCheck Quiz</div>
+                            <div class="card-body">
+                                <h5 class="card-title">\${resultMessage}</h5>
+                                <h5 class="card-text">Correct Questions: \${score}</h5>
+                                <h5 class="card-text">Wrong Questions: \${wrong}</h5>
+                                <h5 class="card-text">Percentage: \${percentage}%</h5>
+                                <a href="" class="btn \${btnClass}" onclick="window.location.reload()">Retake</a>
+                            </div>
+                        </div>
+                    \`;
+                    nextBtnWindow.style.display = "none";
+                }
+
+                function renderQuizWindow() {
+                    if (index >= quiz.length) {
+                        showResultWindow();
+                        return;
+                    }
+                    content.innerHTML = \`
+                        <div id="question">${quiz[index].question}</div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input onclick="nextEnabledWindow()" type="radio" name="listGroupRadio" value="\${quiz[index].option1}" id="firstRadio"/>
+                                <label for="firstRadio">\${quiz[index].option1}</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input onclick="nextEnabledWindow()" type="radio" name="listGroupRadio" value="\${quiz[index].option2}" id="secondRadio"/>
+                                <label for="secondRadio">\${quiz[index].option2}</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input onclick="nextEnabledWindow()" type="radio" name="listGroupRadio" value="\${quiz[index].option3}" id="thirdRadio"/>
+                                <label for="thirdRadio">\${quiz[index].option3}</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input onclick="nextEnabledWindow()" type="radio" name="listGroupRadio" value="\${quiz[index].option4}" id="forthRadio"/>
+                                <label for="forthRadio">\${quiz[index].option4}</label>
+                            </li>
+                        </ul>
+                    \`;
+                    nextBtnWindow.disabled = true;
+                }
+
+                function nextEnabledWindow() {
+                    nextBtnWindow.disabled = false;
+                }
+
+                function nextQuestionWindow() {
+                    var options = document.getElementsByName("listGroupRadio");
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].checked && options[i].value === quiz[index].answer) {
+                            score++;
+                        }
+                    }
+                    index++;
+                    if (index === quiz.length - 1) {
+                        nextBtnWindow.innerText = "Submit";
+                    }
+                    renderQuizWindow();
+                }
+
+                nextBtnWindow.onclick = nextQuestionWindow;
+                renderQuizWindow();
+            </script>
+        </body>
+        </html>
+    `);
+    quizWindow.document.close();
+}

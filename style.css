@@ -1,4 +1,4 @@
- * {
+ /* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -61,7 +61,7 @@ body {
     font-size: 2.5rem;
 }
 
-/* Mobile Responsiveness */
+ 
 @media (max-width: 768px) {
     .container {
         justify-content: flex-start;
@@ -92,4 +92,101 @@ body {
     .btn {
         padding: 10px 20px;
     }
-}
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #e8f7ff, #8bc9ff, #277dff);
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .card {
+    background: linear-gradient(135deg, #ffd9ec, #ff9fc9);
+    color: #003366;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-check-label:hover {
+    cursor: pointer;
+  }
+  
+  .list-group-item {
+    background: linear-gradient(135deg, #ffd9ec, #ff9fc9);
+    color: #003366;
+  }
+  
+  .list-group-item:hover {
+    background-color: lavender;
+  }
+  
+  .btn {
+    background: linear-gradient(135deg, #ffeaf3, #ff8ec4);
+    color: #333;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    width: 100%;
+    max-width: 150px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 150, 200, 0.4);
+    text-align: center;
+  }
+  
+  .heading1 {
+    background: linear-gradient(135deg, #ff9fc9, #ffeaf3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+  
+    .card {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .heading1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+  
+    .btn {
+      max-width: 100%;
+      margin-top: 50px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .heading1 {
+      font-size: 1.8rem;
+    }
+  
+    .btn {
+      padding: 10px 20px;
+    }
+  }
+  
